@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💌 Letter — Joyeux 25 ans</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a0f07;
+      --ink-light:  #3d2612;
+      --sepia:      #7a5c3a;
+      --sepia-dim:  #c4a27a;
+      --cream:      #fdf6e8;
+      --cream-dark: #f0e2c4;
+      --red:        #8b1c1c;
+      --red-warm:   #c0392b;
+      --gold:       #b8860b;
+      --gold-light: #e6c56e;
+      --sky:        #2c4a7a;
+      --blue-ink:   #1b3a6b;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #0a0a14;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 20px 80px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Background parchment texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -3;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 15%, rgba(30,50,100,0.75) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 80% 85%, rgba(50,25,80,0.65) 0%, transparent 65%);
+    }
+
+    /* ── Stars ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: -2;
+      background-image:
+        radial-gradient(1px 1px at  8% 12%, rgba(255,220,150,0.7) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 22% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 18%, rgba(255,220,150,0.6) 0%, transparent 100%),
+        radial-gradient(2px 2px at 57% 5%,  rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 73% 22%, rgba(255,220,150,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 88% 9%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 40%, rgba(255,220,150,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5%  60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 18% 75%, rgba(255,220,150,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 66% 72%, rgba(255,220,150,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 78%, rgba(255,220,150,0.4) 0%, transparent 100%);
+      animation: starDrift 18s ease-in-out infinite alternate;
+    }
+    @keyframes starDrift { to { transform: translateY(-8px) translateX(5px); } }
+
+    /* ── Top golden bar ── */
+    .deco-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 99;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold-light) 50%, var(--gold) 80%, transparent 100%);
+      animation: barGlow 4s ease-in-out infinite;
+    }
+    @keyframes barGlow {
+      0%,100% { opacity: 0.7; }
+      50% { opacity: 1; box-shadow: 0 0 18px var(--gold); }
+    }
+
+    /* ── Back button ── */
+    .retour {
+      position: fixed; top: 16px; left: 16px; z-index: 200;
+      padding: 6px 16px;
+      border: 1px solid rgba(184,134,11,0.4);
+      border-radius: 30px;
+      background: rgba(10,5,2,0.7);
+      color: var(--gold-light);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+    .retour:hover { background: rgba(184,134,11,0.3); transform: translateX(-4px); }
+
+    /* ── Page header ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 44px;
+      animation: revealDown 1s ease both;
+    }
+    @keyframes revealDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-emoji {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      display: block; margin-bottom: 12px;
+      animation: floatIcon 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(200,150,50,0.6));
+    }
+    @keyframes floatIcon {
+      0%,100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-10px) rotate(4deg); }
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      font-weight: 400;
+      color: var(--cream);
+      text-shadow: 0 0 50px rgba(200,150,50,0.3);
+      letter-spacing: 3px;
+    }
+    .header-title em { color: var(--gold-light); font-style: italic; }
+
+    .header-ornament {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      margin: 16px 0;
+    }
+    .orn-line {
+      flex: 1; max-width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .orn-line.r { background: linear-gradient(90deg, var(--gold), transparent); }
+    .orn-diamond {
+      width: 7px; height: 7px;
+      background: var(--gold-light);
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    .header-sub {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      color: rgba(200,180,140,0.7);
+      letter-spacing: 1px;
+    }
+
+    /* ── Envelope outer ── */
+    .envelope-wrap {
+      width: 100%; max-width: 720px;
+      animation: revealUp 1.1s ease 0.4s both;
+    }
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── The letter card ── */
+    .letter-card {
+      background:
+        linear-gradient(160deg, #fdf7e8 0%, #f4e9cc 40%, #efe0ba 100%);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(180,130,50,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    /* Paper texture lines */
+    .letter-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(180,140,80,0.10) 28px
+      );
+      pointer-events: none; z-index: 0;
+    }
+
+    /* Corner fold */
+    .letter-card::after {
+      content: '';
+      position: absolute; top: 0; right: 0; z-index: 1;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 40px 40px 0;
+      border-color: transparent rgba(180,130,50,0.4) transparent transparent;
+      filter: drop-shadow(-2px 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .letter-inner {
+      position: relative; z-index: 2;
+      padding: clamp(32px, 6vw, 60px) clamp(24px, 6vw, 60px) clamp(36px, 6vw, 64px);
+    }
+
+    /* ── Wax seal — gold ── */
+    .wax-wrap { text-align: center; margin-bottom: clamp(20px, 3vh, 32px); }
+    .wax-seal {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: clamp(52px, 10vw, 72px); height: clamp(52px, 10vw, 72px);
+      background: radial-gradient(circle at 38% 32%, #f0d060, #a07010);
+      border-radius: 50%;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.85rem, 2vw, 1.15rem);
+      color: rgba(80, 40, 0, 0.95);
+      box-shadow:
+        0 6px 24px rgba(180,130,10,0.6),
+        0 0 40px rgba(200,160,30,0.25),
+        inset 0 2px 5px rgba(255,255,255,0.4),
+        inset 0 -2px 5px rgba(0,0,0,0.25);
+      animation: sealPulse 3.5s ease-in-out infinite;
+    }
+    @keyframes sealPulse {
+      0%,100% { box-shadow: 0 6px 24px rgba(180,130,10,0.5), inset 0 2px 5px rgba(255,255,255,0.35); }
+      50% { box-shadow: 0 6px 40px rgba(230,180,40,0.85), 0 0 60px rgba(200,160,30,0.3), inset 0 2px 5px rgba(255,255,255,0.35); }
+    }
+
+    /* ── Date ── */
+    .letter-date {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+      color: var(--sepia);
+      text-align: right;
+      margin-bottom: clamp(20px, 3vh, 30px);
+      opacity: 0.85;
+    }
+
+    /* ── Salutation ── */
+    .letter-salut {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    /* ── Dividers ── */
+    .divider {
+      width: 100%; height: 1px; margin: clamp(16px, 2.5vh, 26px) 0;
+      background: linear-gradient(90deg, transparent, rgba(180,130,50,0.45), rgba(180,130,50,0.45), transparent);
+    }
+    .divider-ornament {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin: clamp(18px, 3vh, 28px) 0;
+    }
+    .do-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(140,100,40,0.4));
+    }
+    .do-line.r { background: linear-gradient(90deg, rgba(140,100,40,0.4), transparent); }
+    .do-sym { font-size: 0.7rem; color: rgba(140,100,40,0.6); letter-spacing: 3px; }
+
+    /* ── Letter body blocks ── */
+    .letter-body {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(0.95rem, 2.2vw, 1.18rem);
+      line-height: 2.0;
+      color: var(--ink);
+    }
+
+    .letter-block {
+      margin-bottom: clamp(18px, 3vh, 28px);
+    }
+
+    /* Friendship paragraph */
+    .para-amitie {
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    /* Honesty / tension paragraph */
+    .para-tension {
+      font-style: italic;
+      color: var(--ink-light);
+      border-left: 2px solid rgba(139,28,28,0.3);
+      padding-left: 16px;
+      margin-left: 4px;
+    }
+
+    /* Love paragraph */
+    .para-tendresse {
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    /* Highlight for adjectives */
+    .highlight-warm {
+      color: var(--red);
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    /* Highlight for cute words */
+    .highlight-gold {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* A special pull quote */
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-style: italic;
+      color: var(--sepia);
+      text-align: center;
+      border-top: 1px solid rgba(140,100,40,0.25);
+      border-bottom: 1px solid rgba(140,100,40,0.25);
+      padding: clamp(12px, 2vh, 20px) clamp(10px, 3vw, 30px);
+      margin: clamp(18px, 3vh, 28px) 0;
+      line-height: 1.6;
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '\201C';
+      font-size: 4rem;
+      color: rgba(140,100,40,0.15);
+      position: absolute;
+      top: -10px; left: 4px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+    .pull-quote::after {
+      content: '\201D';
+      font-size: 4rem;
+      color: rgba(140,100,40,0.15);
+      position: absolute;
+      bottom: -30px; right: 4px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+
+    /* Signature area */
+    .signature-area {
+      text-align: right;
+      margin-top: clamp(24px, 4vh, 40px);
+    }
+    .sign-note {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.82rem, 1.8vw, 0.96rem);
+      color: var(--sepia);
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+    .letter-sign {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--ink);
+      line-height: 1.3;
+      filter: drop-shadow(0 1px 2px rgba(60,30,0,0.15));
+    }
+    .sign-heart {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      animation: heartbeat 2s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      20% { transform: scale(1.25); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.1); }
+    }
+
+    /* ── Bottom poem ornament ── */
+    .bottom-ornament {
+      text-align: center;
+      margin-top: clamp(30px, 5vh, 60px);
+      animation: revealUp 1.2s ease 0.8s both;
+    }
+    .bottom-ornament p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+      color: rgba(200,175,130,0.45);
+      letter-spacing: 2px;
+    }
+
+    /* ── SVG floral border overlay ── */
+    #floral-border {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      overflow: visible;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      body { padding-top: 70px; padding-bottom: 60px; }
+      .letter-card::after { border-width: 0 30px 30px 0; }
+      .pull-quote::before, .pull-quote::after { display: none; }
+    }
+    @media (max-width: 400px) {
+      .letter-inner { padding: 24px 16px 32px; }
+      .para-tension { padding-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ FLORAL BORDER SVG ═══════════════════ -->
+  <svg id="floral-border" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <!-- Gold gradient -->
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#f5e17a"/>
+        <stop offset="35%"  stop-color="#c9a84c"/>
+        <stop offset="60%"  stop-color="#e8cc6a"/>
+        <stop offset="100%" stop-color="#a07820"/>
+      </linearGradient>
+      <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%"   stop-color="#f5e17a"/>
+        <stop offset="40%"  stop-color="#c9a84c"/>
+        <stop offset="100%" stop-color="#a07820"/>
+      </linearGradient>
+      <!-- Glow filter -->
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="0.3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="0.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+
+      <!-- ══ CORNER MOTIF (top-left, fits in ~22×22 units) ══ -->
+      <g id="corner">
+        <!-- Main sweeping arm going right -->
+        <path d="M2,2 C6,2 10,3 14,6 C18,9 20,13 22,18" fill="none" stroke="url(#goldGrad)" stroke-width="0.55" stroke-linecap="round"/>
+        <!-- Second arm going down -->
+        <path d="M2,2 C2,6 3,10 6,14 C9,18 13,20 18,22" fill="none" stroke="url(#goldGrad)" stroke-width="0.55" stroke-linecap="round"/>
+
+        <!-- Large spiral at corner origin -->
+        <path d="M2,2 C3.5,1 5,1.5 5.5,3 C6,4.5 5,6 3.5,6 C2,6 1,4.8 1.5,3.5 C2,2.5 3.2,2.2 4,2.8" fill="none" stroke="url(#goldGrad)" stroke-width="0.4" stroke-linecap="round"/>
+
+        <!-- Spiral off horizontal arm at ~8,4 -->
+        <path d="M8,3.8 C9,2.8 10.5,3 10.8,4.2 C11.1,5.4 10,6.2 8.8,5.8 C7.8,5.5 7.5,4.4 8.2,3.8" fill="none" stroke="url(#goldGrad)" stroke-width="0.35"/>
+        <!-- leaf at 8,4 -->
+        <path d="M8,3.8 C7,2.5 6,2 5.5,2.5 C5,3 5.5,4.2 7,4.5" fill="url(#goldGrad)" opacity="0.85"/>
+        <path d="M8,3.8 C8.5,2.2 9.5,1.8 10,2.4 C10.5,3 10,4 8.8,4.2" fill="url(#goldGrad)" opacity="0.85"/>
+
+        <!-- Spiral off horizontal arm at ~14,7 -->
+        <path d="M14,6.5 C15.2,5.5 16.8,5.8 17,7 C17.2,8.2 16,9 14.8,8.5 C13.8,8.1 13.5,7 14.2,6.4" fill="none" stroke="url(#goldGrad)" stroke-width="0.35"/>
+        <!-- leaf at 14,6.5 -->
+        <path d="M14,6.5 C13,5 12,4.5 11.5,5.2 C11,6 11.8,7.2 13.2,7.2" fill="url(#goldGrad)" opacity="0.85"/>
+        <path d="M14,6.5 C14.8,5 16,4.5 16.5,5.2 C17,6 16.2,7.2 14.8,7.2" fill="url(#goldGrad)" opacity="0.85"/>
+
+        <!-- Spiral off vertical arm at ~4,8 -->
+        <path d="M3.8,8 C2.8,9 3,10.5 4.2,10.8 C5.4,11.1 6.2,10 5.8,8.8 C5.5,7.8 4.4,7.5 3.8,8.2" fill="none" stroke="url(#goldGrad)" stroke-width="0.35"/>
+        <!-- leaf -->
+        <path d="M3.8,8 C2.5,7 2,6 2.5,5.5 C3,5 4.2,5.5 4.5,7" fill="url(#goldGrad)" opacity="0.85"/>
+        <path d="M3.8,8 C2.2,8.5 1.8,9.5 2.4,10 C3,10.5 4,10 4.2,8.8" fill="url(#goldGrad)" opacity="0.85"/>
+
+        <!-- Spiral off vertical arm at ~6.5,14 -->
+        <path d="M6.5,14 C5.5,15.2 5.8,16.8 7,17 C8.2,17.2 9,16 8.5,14.8 C8.1,13.8 7,13.5 6.4,14.2" fill="none" stroke="url(#goldGrad)" stroke-width="0.35"/>
+        <path d="M6.5,14 C5,13 4.5,12 5.2,11.5 C6,11 7.2,11.8 7.2,13.2" fill="url(#goldGrad)" opacity="0.85"/>
+        <path d="M6.5,14 C5,14.8 4.5,16 5.2,16.5 C6,17 7.2,16.2 7.2,14.8" fill="url(#goldGrad)" opacity="0.85"/>
+
+        <!-- Mid crossing flourish -->
+        <path d="M9,9 C10,7.5 12,7 13,8 C14,9 13.5,11 12,11.5 C10.5,12 9,11 9,9 Z" fill="none" stroke="url(#goldGrad)" stroke-width="0.3" opacity="0.7"/>
+        <circle cx="10.5" cy="9.5" r="0.45" fill="#f0d060" opacity="0.9"/>
+
+        <!-- Outer tip dots -->
+        <circle cx="22" cy="18.5" r="0.5"  fill="#e8cc6a" opacity="0.8"/>
+        <circle cx="18.5" cy="22" r="0.5"  fill="#e8cc6a" opacity="0.8"/>
+        <circle cx="2"    cy="2"  r="0.7"  fill="#f5e17a" opacity="0.95" filter="url(#glow)"/>
+
+        <!-- Fine tendrils -->
+        <path d="M12,5.5 C13,4.5 13.5,3.5 13,3 C12.5,2.5 11.5,3 11,4" fill="none" stroke="#d4aa50" stroke-width="0.25" stroke-linecap="round" opacity="0.8"/>
+        <path d="M5.5,12 C4.5,13 3.5,13.5 3,13 C2.5,12.5 3,11.5 4,11" fill="none" stroke="#d4aa50" stroke-width="0.25" stroke-linecap="round" opacity="0.8"/>
+        <path d="M17,11 C18.5,10 19.5,8.5 19,8 C18.5,7.5 17,8 16.5,9.5" fill="none" stroke="#d4aa50" stroke-width="0.25" stroke-linecap="round" opacity="0.8"/>
+        <path d="M11,17 C10,18.5 8.5,19.5 8,19 C7.5,18.5 8,17 9.5,16.5" fill="none" stroke="#d4aa50" stroke-width="0.25" stroke-linecap="round" opacity="0.8"/>
+      </g>
+
+      <!-- ══ SIDE MOTIF (small repeating element for edges) ══ -->
+      <g id="side-motif">
+        <path d="M0,0 C1,-1.5 2,-1.5 2,0 C2,1.5 1,1.5 0,0 Z" fill="url(#goldGrad)" opacity="0.7"/>
+        <path d="M0,0 C-0.5,-2 0.5,-2.5 1,-1.5" fill="none" stroke="#d4aa50" stroke-width="0.2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M0,0 C-0.5,2 0.5,2.5 1,1.5" fill="none" stroke="#d4aa50" stroke-width="0.2" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="1" cy="0" r="0.25" fill="#f0d060" opacity="0.85"/>
+      </g>
+    </defs>
+
+    <!-- ══════════ 4 CORNERS ══════════ -->
+    <!-- Top-left -->
+    <g filter="url(#glow2)" opacity="0.92">
+      <use href="#corner" transform="translate(0,0) scale(0.38)"/>
+    </g>
+
+    <!-- Top-right (mirror X) -->
+    <g filter="url(#glow2)" opacity="0.92">
+      <use href="#corner" transform="translate(100,0) scale(-0.38,0.38)"/>
+    </g>
+
+    <!-- Bottom-left (mirror Y) -->
+    <g filter="url(#glow2)" opacity="0.92">
+      <use href="#corner" transform="translate(0,100) scale(0.38,-0.38)"/>
+    </g>
+
+    <!-- Bottom-right (mirror X+Y) -->
+    <g filter="url(#glow2)" opacity="0.92">
+      <use href="#corner" transform="translate(100,100) scale(-0.38,-0.38)"/>
+    </g>
+
+    <!-- ══════════ BORDER LINES ══════════ -->
+    <!-- Top line -->
+    <line x1="8.5" y1="0.5" x2="91.5" y2="0.5" stroke="url(#goldGrad)" stroke-width="0.18" opacity="0.7"/>
+    <line x1="8.5" y1="1.2" x2="91.5" y2="1.2" stroke="#f0d060" stroke-width="0.08" opacity="0.4"/>
+    <!-- Bottom line -->
+    <line x1="8.5" y1="99.5" x2="91.5" y2="99.5" stroke="url(#goldGrad)" stroke-width="0.18" opacity="0.7"/>
+    <line x1="8.5" y1="98.8" x2="91.5" y2="98.8" stroke="#f0d060" stroke-width="0.08" opacity="0.4"/>
+    <!-- Left line -->
+    <line x1="0.5" y1="8.5" x2="0.5" y2="91.5" stroke="url(#goldGrad)" stroke-width="0.18" opacity="0.7"/>
+    <line x1="1.2" y1="8.5" x2="1.2" y2="91.5" stroke="#f0d060" stroke-width="0.08" opacity="0.4"/>
+    <!-- Right line -->
+    <line x1="99.5" y1="8.5" x2="99.5" y2="91.5" stroke="url(#goldGrad)" stroke-width="0.18" opacity="0.7"/>
+    <line x1="98.8" y1="8.5" x2="98.8" y2="91.5" stroke="#f0d060" stroke-width="0.08" opacity="0.4"/>
+
+    <!-- ══════════ SIDE ACCENT MOTIFS ══════════ -->
+    <!-- Top center -->
+    <g transform="translate(50,1.2) scale(0.12)" filter="url(#glow)">
+      <use href="#side-motif"/>
+    </g>
+    <!-- Bottom center -->
+    <g transform="translate(50,98.8) scale(0.12)" filter="url(#glow)">
+      <use href="#side-motif" transform="scale(1,-1)"/>
+    </g>
+    <!-- Left center -->
+    <g transform="translate(1.2,50) rotate(90) scale(0.12)" filter="url(#glow)">
+      <use href="#side-motif"/>
+    </g>
+    <!-- Right center -->
+    <g transform="translate(98.8,50) rotate(90) scale(0.12)" filter="url(#glow)">
+      <use href="#side-motif" transform="scale(1,-1)"/>
+    </g>
+
+    <!-- Top quarter motifs -->
+    <g transform="translate(25,1.2) scale(0.09)" filter="url(#glow)"><use href="#side-motif"/></g>
+    <g transform="translate(75,1.2) scale(0.09)" filter="url(#glow)"><use href="#side-motif"/></g>
+    <g transform="translate(25,98.8) scale(0.09)" filter="url(#glow)"><use href="#side-motif" transform="scale(1,-1)"/></g>
+    <g transform="translate(75,98.8) scale(0.09)" filter="url(#glow)"><use href="#side-motif" transform="scale(1,-1)"/></g>
+    <g transform="translate(1.2,25) rotate(90) scale(0.09)" filter="url(#glow)"><use href="#side-motif"/></g>
+    <g transform="translate(1.2,75) rotate(90) scale(0.09)" filter="url(#glow)"><use href="#side-motif"/></g>
+    <g transform="translate(98.8,25) rotate(90) scale(0.09)" filter="url(#glow)"><use href="#side-motif" transform="scale(1,-1)"/></g>
+    <g transform="translate(98.8,75) rotate(90) scale(0.09)" filter="url(#glow)"><use href="#side-motif" transform="scale(1,-1)"/></g>
+
+    <!-- Shimmer animation on the whole border -->
+    <style>
+      #floral-border { animation: borderShimmer 5s ease-in-out infinite alternate; }
+      @keyframes borderShimmer {
+        0%   { filter: drop-shadow(0 0 3px rgba(201,168,76,0.3)); opacity: 0.88; }
+        50%  { filter: drop-shadow(0 0 8px rgba(230,197,110,0.7)); opacity: 1; }
+        100% { filter: drop-shadow(0 0 4px rgba(201,168,76,0.4)); opacity: 0.92; }
+      }
+    </style>
+  </svg>
+
+  <div class="deco-bar"></div>
+  <a href="accueil.html" class="retour">← Retour</a>
+
+  <!-- ═══════════════════ PAGE HEADER ═══════════════════ -->
+  <header class="page-header">
+    <span class="header-emoji">💌</span>
+    <h1 class="header-title">A <em>Letter</em> For You</h1>
+    <div class="header-ornament">
+      <span class="orn-line"></span>
+      <span class="orn-diamond"></span>
+      <span class="orn-line r"></span>
+    </div>
+    <p class="header-sub">Des mots écrits avec tout mon cœur et un tout petit peu de haine</p>
+  </header>
+
+  <!-- ═══════════════════ LETTER ═══════════════════ -->
+  <div class="envelope-wrap">
+    <div class="letter-card">
+      <div class="letter-inner">
+
+        <!-- Seal -->
+       
+
+        <!-- Date -->
+        <p class="letter-date">Le jour de tes 25 ans, 30/05/2026 ✦</p>
+
+        <!-- Salutation -->
+        <p class="letter-salut">Mon meilleur,</p>
+
+        <div class="divider"></div>
+
+        <!-- ── BLOC 1 : L'aveu doux-amer ── -->
+        <div class="letter-block para-amitie letter-body">
+          Ceci n'est pas une déclaration d'amour.<br>
+          Mais mieux que ça,<br>
+          <em>Une lettre d'amitié</em> cette chose magnifique qui ressemble parfois à de l'amour, parfois à de la haine et souvent aux deux en même temps.
+        </div>
+
+        <!-- ── PULL QUOTE ── -->
+        <div class="pull-quote">
+          Notre relation est un roman : des hauts vertigineux, des bas catastrophiques,<br>
+          et en ce moment elle est carrément au sous-sol.<br>
+          Mais pourtant, je n'échangerais pas une seule page.
+        </div>
+
+        <!-- ── BLOC 2 : La tension, la vérité ── -->
+        <div class="letter-block para-tension letter-body">
+          Je ne vais pas prétendre que tout va bien entre nous.<br>
+          Tu m'énerves tellement mais tellement beaucoup trop.<br>
+          Il y a des jours où je te déteste sincèrement de tout mon cœur et tu le sais.<br><br>
+          Mais c'est justement ça qui prouve quelque chose :<br>
+          <strong>on ne déteste vraiment que ce qu'on aime vraiment.</strong><br>
+        </div>
+
+        <div class="divider-ornament">
+          <span class="do-line"></span>
+          <span class="do-sym">✦ ✦ ✦</span>
+          <span class="do-line r"></span>
+        </div>
+
+        <!-- ── BLOC 3 : Les jours difficiles ── -->
+        <div class="letter-block para-amitie letter-body">
+          Je sais que la vie n'est pas toujours simple.<br>
+          Que certains matins ressemblent à des batailles avant même de lever les yeux.<br><br>
+          Mais sache que dans ces moments-là, <em>même quand je fais semblant de ne pas te voir</em>,<br>
+          même quand la distance entre nous semble immense <br>
+          je suis là silencieusement.
+        </div>
+
+        <!-- ── BLOC 4 : La tendresse ── -->
+        <div class="letter-block para-tendresse letter-body">
+          En ce jour si particulier, je voulais que tu saches ce que tu es vraiment une personne <span class="highlight-warm">gentille</span>,<span class="highlight-warm">drôle</span> ,<span class="highlight-warm">adorable</span>,<span class="highlight-warm">intelligente</span>,<span class="highlight-gold">and a sexy tall guy</span><br><br>
+          Et oui, je ne le dirai qu'une fois :<br>
+        </div>
+
+        <div class="divider-ornament">
+          <span class="do-line"></span>
+          <span class="do-sym">❦</span>
+          <span class="do-line r"></span>
+        </div>
+
+        <!-- ── BLOC 5 : La conclusion ── -->
+        <div class="letter-block para-amitie letter-body">
+          25 ans.<br>
+          Une vie entière commence à peine.<br><br>
+          Et quelle que soit la distance, les silences, les disputes <br>
+          tu porteras toujours avec toi ce petit bout de moi<br>
+          qui a choisi de t'appeler <em>son meilleur</em>.
+        </div>
+
+        <!-- ── Signature ── -->
+        <div class="divider"></div>
+
+        <div class="signature-area">
+          <p class="sign-note">Avec tout ce que j'ai :<br>l'amour, la haine, et tout ce qu'il y a entre les deux,</p>
+          <p class="letter-sign">Poulmera <span class="sign-heart">❤️</span> </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ BOTTOM ORNAMENT ═══════════════════ -->
+  <div class="bottom-ornament">
+    <p>✦ &nbsp; pour toujours, même quand c'est dur &nbsp; ✦</p>
+  </div>
+
+  <!-- ═══════════════════ PARTICLES ═══════════════════ -->
+  <!-- particles removed -->
+
+</body>
+</html>

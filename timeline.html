@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story ⏳</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #c9a84c;
+      --gold-light: #f0d080;
+      --gold-dim:   #8a6820;
+      --deep:       #0a0a14;
+      --navy2:      #112240;
+      --surface2:   #1e2d45;
+      --text:       #eee8d8;
+      --text-dim:   #9aaac0;
+      --radius:     12px;
+      --line-x:     50%;        /* position axe timeline desktop */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--deep);
+      color: var(--text);
+      min-height: 100dvh;
+      padding: clamp(68px, 10dvh, 100px) clamp(12px, 4vw, 28px) 70px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Fond étoilé ── */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 15%, rgba(30,50,100,0.75) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 80% 85%, rgba(50,25,80,0.65) 0%, transparent 65%);
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: -1;
+      background-image:
+        radial-gradient(1.5px 1.5px at  6% 10%, rgba(255,255,255,0.85) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 20% 35%, rgba(255,255,255,0.60) 0%, transparent 100%),
+        radial-gradient(2px   2px   at 36%  6%, rgba(255,255,255,0.90) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 53% 22%, rgba(255,255,255,0.65) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 68% 47%, rgba(255,255,255,0.55) 0%, transparent 100%),
+        radial-gradient(2px   2px   at 81% 16%, rgba(255,255,255,0.80) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 46% 80%, rgba(255,255,255,0.70) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 28% 55%, rgba(201,168,76,0.50)  0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 60% 76%, rgba(201,168,76,0.40)  0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 92% 44%, rgba(201,168,76,0.35)  0%, transparent 100%);
+      animation: starDrift 24s ease-in-out infinite alternate;
+    }
+    @keyframes starDrift { to { transform: translateY(-9px) translateX(5px); } }
+
+    /* ── Barre dorée ── */
+    .deco-line {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 99;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-light), var(--gold), var(--gold-dim), transparent);
+      animation: lineGlow 4s ease-in-out infinite;
+    }
+    @keyframes lineGlow { 0%,100% { opacity: 0.7; } 50% { opacity: 1; box-shadow: 0 0 18px var(--gold); } }
+
+    /* ── Retour ── */
+    .retour {
+      position: fixed; top: 14px; left: 14px; z-index: 999;
+      padding: 6px 14px;
+      border: 1px solid var(--gold-dim); border-radius: 999px;
+      background: rgba(20,24,42,0.8); color: var(--gold-light);
+      font-size: clamp(0.62rem, 1.5vw, 0.82rem);
+      font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; backdrop-filter: blur(10px); transition: 0.3s;
+    }
+    .retour:hover { background: var(--gold-dim); color: white; transform: translateX(-2px); }
+
+    /* ── Contenu ── */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(28px, 5dvh, 48px);
+    }
+
+    /* ── Header ── */
+    .header { text-align: center; animation: fadeDown 1s ease both; }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .header-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 9vw, 4.8rem);
+      background: linear-gradient(135deg, #fff, var(--gold-light) 40%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(201,168,76,0.5));
+      line-height: 1;
+    }
+    .gold-divider {
+      width: clamp(90px, 20vw, 150px); height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 14px auto;
+    }
+    .header-sub {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(0.9rem, 2.2vw, 1.1rem); color: var(--text-dim);
+      padding: 0 clamp(8px, 3vw, 20px);
+    }
+
+    /* ══════════════════════════════════════
+       TIMELINE — DESKTOP (≥ 640px)
+       Ligne centrale, alternance gauche/droite
+    ══════════════════════════════════════ */
+    .timeline {
+      position: relative;
+      padding: 20px 0 20px;
+    }
+
+    /* Ligne verticale centrale */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: var(--line-x);
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--gold-dim) 8%,
+        var(--gold) 30%,
+        var(--gold-light) 50%,
+        var(--gold) 70%,
+        var(--gold-dim) 92%,
+        transparent
+      );
+      transform: translateX(-50%);
+    }
+
+    /* ── Événement ── */
+    .event {
+      position: relative;
+      width: 48%;
+      padding: clamp(14px, 2.5dvh, 22px) clamp(16px, 3vw, 28px);
+      margin: clamp(16px, 3dvh, 28px) 0;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .event.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Côté gauche */
+    .event.left {
+      left: 0;
+      text-align: right;
+      padding-right: clamp(36px, 6vw, 56px);
+    }
+    /* Côté droit */
+    .event.right {
+      left: 52%;
+      text-align: left;
+      padding-left: clamp(36px, 6vw, 56px);
+    }
+
+    /* Contenu de la carte */
+    .event-content {
+      background: linear-gradient(145deg, var(--surface2), var(--navy2));
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: var(--radius);
+      padding: clamp(14px, 2.5vw, 20px) clamp(16px, 3vw, 24px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+      position: relative;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .event-content:hover {
+      box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 20px rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.5);
+    }
+    .event.left  .event-content { border-right: 3px solid var(--gold); }
+    .event.right .event-content { border-left:  3px solid var(--gold); }
+
+    /* Date */
+    .event-date {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    /* Titre */
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      font-weight: 600; margin-bottom: 8px; color: var(--text);
+      line-height: 1.3;
+    }
+    /* Description */
+    .event-desc {
+      font-size: clamp(0.85rem, 1.9vw, 1rem);
+      line-height: 1.75; color: var(--text-dim);
+    }
+    .event-desc strong { color: var(--text); font-weight: 600; }
+
+    /* Icône sur l'axe */
+    .event-icon {
+      position: absolute;
+      top: clamp(16px, 3dvh, 22px);
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      filter: drop-shadow(0 0 8px rgba(201,168,76,0.55));
+      z-index: 2;
+      /* Centré sur la ligne */
+      width: 36px;
+      height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--deep);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+    .event.left  .event-icon {
+      right: clamp(-22px, -3.5vw, -18px);
+      transform: translateX(50%);
+    }
+    .event.right .event-icon {
+      left: clamp(-22px, -3.5vw, -18px);
+      transform: translateX(-50%);
+    }
+
+    /* ══════════════════════════════════════
+       TIMELINE — MOBILE (< 640px)
+       Ligne sur la gauche, tout aligné à droite
+    ══════════════════════════════════════ */
+    @media (max-width: 640px) {
+      :root { --line-x: 20px; }
+
+      .timeline::before {
+        left: 20px;
+        transform: none;
+      }
+
+      /* Tous les événements : colonne pleine largeur */
+      .event,
+      .event.left,
+      .event.right {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding: clamp(10px, 2dvh, 16px) clamp(12px, 3vw, 18px);
+        padding-left: clamp(52px, 12vw, 68px); /* espace pour icône + ligne */
+        margin: clamp(12px, 2dvh, 20px) 0;
+      }
+
+      /* Icône alignée sur la ligne gauche */
+      .event-icon,
+      .event.left  .event-icon,
+      .event.right .event-icon {
+        left: 2px !important;
+        right: auto !important;
+        top: clamp(12px, 2dvh, 18px);
+        transform: none;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        width: 32px; height: 32px;
+      }
+
+      /* Bordure : toujours à gauche sur mobile */
+      .event.left  .event-content { border-right: none; border-left: 3px solid var(--gold); }
+      .event.right .event-content { border-left: 3px solid var(--gold); }
+
+      /* Carte un peu moins large */
+      .event-content {
+        padding: clamp(12px, 3vw, 18px) clamp(12px, 3vw, 18px);
+      }
+
+      .event-title { font-size: clamp(1rem, 4.5vw, 1.2rem); }
+      .event-desc  { font-size: clamp(0.82rem, 3.5vw, 0.95rem); }
+    }
+
+    /* Très petits écrans */
+    @media (max-width: 380px) {
+      body { padding-left: 8px; padding-right: 8px; }
+      .event,
+      .event.left,
+      .event.right {
+        padding-left: 46px;
+      }
+      .event-icon,
+      .event.left .event-icon,
+      .event.right .event-icon {
+        width: 28px; height: 28px; font-size: 1rem;
+      }
+    }
+
+    /* ── Particules ── */
+    .particle {
+      position: fixed; pointer-events: none; z-index: 10;
+      animation: partFloat linear forwards;
+    }
+    @keyframes partFloat {
+      0%   { transform: translateY(0) translateX(0); opacity: .9; }
+      100% { transform: translateY(-90dvh) translateX(var(--dx,20px)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deco-line"></div>
+  <a href="accueil.html" class="retour">← Retour</a>
+
+  <div class="content">
+
+    <header class="header">
+      <h1 class="header-title">Our Story</h1>
+      <div class="gold-divider"></div>
+      <p class="header-sub">Ce fil invisible qui nous ramène toujours l'un vers l'autre</p>
+    </header>
+
+    <div class="timeline" id="timeline">
+
+      <div class="event left">
+        <span class="event-icon">✨</span>
+        <div class="event-content">
+          <div class="event-date">Le début</div>
+          <div class="event-title">Meilleurs amis sans le savoir</div>
+          <p class="event-desc">On a commencé par des rires interminables, des confidences tard la nuit, des "toi et moi contre le monde".<br>C'était simple, pur et déjà bien trop fort.</p>
+        </div>
+      </div>
+
+      <div class="event right">
+        <span class="event-icon">💥</span>
+        <div class="event-content">
+          <div class="event-date">Le premier clash</div>
+          <div class="event-title">Amour ou amitié ?</div>
+          <p class="event-desc">On s'est regardés différemment un soir.<br>Et au lieu de parler, on a décidé de faire l'aveugle.<br>Parce que c'était trop effrayant.<br>On s'aimait déjà mais on refusait de l'assumer.</p>
+        </div>
+      </div>
+
+      <div class="event left">
+        <span class="event-icon">🔥</span>
+        <div class="event-content">
+          <div class="event-date">Les allers-retours</div>
+          <div class="event-title">Je t'aime / je te déteste</div>
+          <p class="event-desc">On se disputait, on se ghostait pendant des semaines.<br>Puis un "tu me manques"<br>et on revenait, on se reconciliait, on se disputait encore.</p>
+        </div>
+      </div>
+
+      <div class="event right">
+        <span class="event-icon">🖤</span>
+        <div class="event-content">
+          <div class="event-date">Le silence</div>
+          <div class="event-title">Ghosting mutuel</div>
+          <p class="event-desc">Des mois sans nouvelles.<br>Chacun essayait de vivre sans l'autre.<br>Mais on finissait toujours par craquer.<br>Parce que même en silence, on s'entendait penser l'un à l'autre.</p>
+        </div>
+      </div>
+
+      <div class="event left">
+        <span class="event-icon">🌊</span>
+        <div class="event-content">
+          <div class="event-date">Les décalages</div>
+          <div class="event-title">Pas sur la même longueur d'onde</div>
+          <p class="event-desc">La roue a tourné. Toi tu voulais de la légèreté, moi de la profondeur.<br>Toi tu fuyais les sentiments, moi je les exprimais trop.<br>Et pourtant on restait.<br>Parce que ce qui nous unit est plus fort que nos différences.</p>
+        </div>
+      </div>
+
+      <div class="event right">
+        <span class="event-icon">💙</span>
+        <div class="event-content">
+          <div class="event-date">Aujourd'hui</div>
+          <div class="event-title">On s'assume (un peu)</div>
+          <p class="event-desc">On n'est toujours pas "normaux".<br>On se chamaille, on se réconcilie, on se ghoste parfois encore.<br>Mais on sait une chose :<br><strong>peu importe les tempêtes, on revient toujours.</strong><br>Parce que c'est toi. Et c'est moi.<br>Et que ce mélange d'amitié et d'amour est notre plus belle évidence.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* Apparition progressive au scroll */
+    const events = document.querySelectorAll('.event');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    events.forEach(e => observer.observe(e));
+
+    /* Particules ambiantes */
+    const pSym = ['✦','✧','⋆','·','♡'];
+    const pCol = ['#c9a84c','#f0d080','#fff','#b0d0ff'];
+    setInterval(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = pSym[Math.floor(Math.random() * pSym.length)];
+      p.style.color = pCol[Math.floor(Math.random() * pCol.length)];
+      p.style.left  = (Math.random() * 100) + 'vw';
+      p.style.top   = '96dvh';
+      p.style.setProperty('--dx', (Math.random() * 110 - 55) + 'px');
+      p.style.fontSize = (Math.random() * 9 + 7) + 'px';
+      p.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(p);
+      p.addEventListener('animationend', () => p.remove());
+    }, window.innerWidth < 600 ? 2200 : 1500);
+  </script>
+
+</body>
+</html>

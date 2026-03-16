@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wishes 🌠</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #c9a84c;
+      --gold-light: #f0d080;
+      --gold-dim:   #8a6820;
+      --deep:       #0a0a14;
+      --navy2:      #112240;
+      --surface2:   #1e2d45;
+      --text:       #eee8d8;
+      --text-dim:   #9aaac0;
+      --radius:     14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--deep);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(70px, 10vh, 100px) clamp(12px, 4vw, 28px) 60px;
+      overflow-x: hidden;
+    }
+
+    /* ── Fond étoilé ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 15%, rgba(30,50,100,0.75) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 80% 85%, rgba(50,25,80,0.65) 0%, transparent 65%);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background-image:
+        radial-gradient(1.5px 1.5px at  6% 10%, rgba(255,255,255,0.85) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 20% 35%, rgba(255,255,255,0.60) 0%, transparent 100%),
+        radial-gradient(2px   2px   at 36%  6%, rgba(255,255,255,0.90) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 53% 22%, rgba(255,255,255,0.65) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 68% 47%, rgba(255,255,255,0.55) 0%, transparent 100%),
+        radial-gradient(2px   2px   at 81% 16%, rgba(255,255,255,0.80) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 90% 65%, rgba(255,255,255,0.60) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 10% 70%, rgba(255,255,255,0.55) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 46% 80%, rgba(255,255,255,0.70) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 28% 55%, rgba(201,168,76,0.50)  0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 60% 76%, rgba(201,168,76,0.40)  0%, transparent 100%);
+      animation: starDrift 22s ease-in-out infinite alternate;
+    }
+    @keyframes starDrift { to { transform: translateY(-10px) translateX(6px); } }
+
+    /* Étoile filante */
+    .shooting-star {
+      position: fixed;
+      width: clamp(60px, 12vw, 120px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 0;
+      animation: shootStar linear forwards;
+    }
+    @keyframes shootStar {
+      0%   { transform: translateX(-20vw) translateY(0) rotate(-25deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.8; }
+      100% { transform: translateX(120vw) translateY(var(--dy,80px)) rotate(-25deg); opacity: 0; }
+    }
+
+    /* Barre dorée */
+    .deco-line {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-light), var(--gold), var(--gold-dim), transparent);
+      animation: lineGlow 3s ease-in-out infinite;
+    }
+    @keyframes lineGlow {
+      0%,100% { opacity: 0.75; }
+      50%      { opacity: 1; box-shadow: 0 0 22px var(--gold); }
+    }
+
+    /* Bouton retour */
+    .retour {
+      position: fixed; top: 18px; left: 18px;
+      padding: 7px 16px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 30px;
+      background: rgba(20,24,42,0.75);
+      color: var(--gold-light);
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(0.62rem, 1.4vw, 0.78rem);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .retour:hover { background: var(--gold-dim); color: #fff; transform: translateX(-3px); }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: clamp(20px, 3.5vh, 40px);
+      animation: fadeDown 1s ease both;
+      position: relative; z-index: 1;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .header-icon {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      display: block; margin-bottom: 8px;
+      filter: drop-shadow(0 0 14px rgba(201,168,76,0.6));
+      animation: starSpin 8s linear infinite;
+    }
+    @keyframes starSpin {
+      0%   { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    .header-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 4vw, 2.6rem);
+      font-weight: 400;
+      color: var(--text);
+      text-shadow: 0 0 40px rgba(201,168,76,0.35);
+    }
+    .header-title span { color: var(--gold-light); }
+    .gold-divider {
+      width: clamp(70px, 14vw, 120px); height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: clamp(8px, 1.8vh, 14px) auto;
+    }
+    .header-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.82rem, 2vw, 1.05rem);
+      color: var(--text-dim);
+    }
+
+    /* Instruction */
+    .scratch-hint {
+      font-size: clamp(0.62rem, 1.5vw, 0.75rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: clamp(16px, 3vh, 28px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: fadeDown 1.1s ease 0.4s both;
+      position: relative; z-index: 1;
+    }
+    .scratch-hint::before,
+    .scratch-hint::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+    }
+    .scratch-hint::before { background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+    .scratch-hint::after  { background: linear-gradient(90deg, var(--gold-dim), transparent); }
+
+    /* ══════════════════════════════
+       GRILLE — 2 colonnes égales,
+       alignées proprement
+    ══════════════════════════════ */
+    .scratch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: auto;  /* hauteur auto = même hauteur par rangée */
+      gap: clamp(12px, 2.5vw, 22px);
+      width: 100%;
+      max-width: 700px;
+      position: relative; z-index: 1;
+      animation: fadeDown 1.3s ease 0.5s both;
+    }
+
+    /* Wrapper */
+    .scratch-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;   /* étire la carte à la largeur complète */
+      gap: 6px;
+    }
+
+    /* Carte featured : pleine largeur */
+    .scratch-wrap.featured {
+      grid-column: 1 / -1;
+      align-items: center;
+    }
+    .scratch-wrap.featured .scratch-container {
+      max-width: 460px;
+      width: 100%;
+    }
+
+    /* Label */
+    .scratch-label {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── Conteneur carte ── */
+    .scratch-container {
+      position: relative;
+      width: 100%;
+      /* Ratio fixe 16:10 → la hauteur s'adapte à la largeur */
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(201,168,76,0.3);
+      cursor: crosshair;
+      user-select: none;
+      touch-action: none;
+    }
+
+    /* Contenu révélé */
+    .scratch-reveal {
+      position: absolute; inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(10px, 2.5vw, 18px);
+      text-align: center;
+      gap: clamp(4px, 1vw, 8px);
+    }
+    .reveal-icon {
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      filter: drop-shadow(0 0 8px rgba(201,168,76,0.5));
+      line-height: 1;
+    }
+    .reveal-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.65rem, 1.4vw, 0.88rem);
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 1px;
+    }
+    .reveal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.78rem, 1.7vw, 1rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Canvas */
+    .scratch-canvas {
+      position: absolute; inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    /* Badge révélé */
+    .scratched-badge {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      font-size: clamp(0.55rem, 1.1vw, 0.65rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-family: 'Raleway', sans-serif;
+      text-align: center;
+    }
+    .scratched-badge.show { opacity: 1; }
+
+    /* Footer */
+    .footer {
+      margin-top: clamp(28px, 4.5vh, 50px);
+      text-align: center;
+      position: relative; z-index: 1;
+      animation: fadeDown 1.5s ease 0.8s both;
+    }
+    .footer-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+      color: var(--gold-light);
+      filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+    }
+
+    /* Particules */
+    .particle {
+      position: fixed; pointer-events: none; z-index: 10;
+      animation: partFloat linear forwards;
+    }
+    @keyframes partFloat {
+      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.9; }
+      100% { transform: translateY(-88vh) translateX(var(--dx,20px)) scale(0.3); opacity: 0; }
+    }
+
+    /* Mobile 1 colonne */
+    @media (max-width: 400px) {
+      .scratch-grid { grid-template-columns: 1fr; }
+      .scratch-wrap.featured { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deco-line"></div>
+  <a href="accueil.html" class="retour">← Retour</a>
+
+  <header class="header">
+    <span class="header-icon">🌠</span>
+    <h1 class="header-title">My <span>Wishes</span> For You</h1>
+    <div class="gold-divider"></div>
+    <p class="header-sub">Gratte chaque carte pour découvrir ton vœu</p>
+  </header>
+
+  <p class="scratch-hint">✦ Gratte pour révéler ✦</p>
+
+  <div class="scratch-grid" id="scratchGrid"></div>
+
+  <div class="footer">
+    <p class="footer-text">Que tes étoiles brillent fort 🌟</p>
+  </div>
+
+  <script>
+    const wishes = [
+      {
+        label: "Vœu N°1",
+        icon: "☀️",
+        title: "Bonheur au quotidien",
+        text: "Que chaque matin tu te réveilles avec le sourire, et chaque soir avec la paix dans le cœur.",
+        bg: ["#1a3a6a","#0d2040"],
+        scratch: ["#c9a84c","#a06010","#fff8e0"]
+      },
+      {
+        label: "Vœu N°2",
+        icon: "🌿",
+        title: "Santé & sérénité",
+        text: "Que ton corps soit fort, ton esprit tranquille, et que la vie te préserve de tout mal.",
+        bg: ["#1a3a2a","#0d2018"],
+        scratch: ["#70b880","#3a7040","#e0ffe8"]
+      },
+      {
+        label: "Vœu N°3",
+        icon: "🚀",
+        title: "Succès & ambition",
+        text: "Que tes rêves deviennent des projets, et chaque effort soit récompensé à sa juste valeur.",
+        bg: ["#3a1a5a","#200d40"],
+        scratch: ["#b070e0","#7030a0","#f0e0ff"]
+      },
+      {
+        label: "Vœu N°4",
+        icon: "💛",
+        title: "Amour & belles rencontres",
+        text: "Que tu sois entouré de personnes qui te voient pour ce que tu vaux vraiment.",
+        bg: ["#4a2a10","#2a1808"],
+        scratch: ["#e0a040","#c06010","#fff4d0"]
+      },
+      {
+        label: "Vœu N°5",
+        icon: "🗺️",
+        title: "Aventures & découvertes",
+        text: "Que cette année t'ouvre des portes inattendues et des horizons nouveaux.",
+        bg: ["#0a2a4a","#06182a"],
+        scratch: ["#4090d0","#1060a0","#d0eeff"]
+      },
+      {
+        label: "Vœu N°6",
+        icon: "💙",
+        title: "Par-dessus tout…",
+        text: "Que cette vie te donne tout ce que tu mérites. Joyeux anniversaire, mon meilleur.",
+        bg: ["#112240","#0a1428"],
+        scratch: ["#f0d080","#c9a84c","#fffbe0"]
+      }
+    ];
+
+    const grid = document.getElementById('scratchGrid');
+
+    wishes.forEach(w => {
+      const wrap = document.createElement('div');
+      wrap.className = 'scratch-wrap' + (w.featured ? ' featured' : '');
+
+      const lbl = document.createElement('p');
+      lbl.className = 'scratch-label';
+      lbl.textContent = w.label;
+
+      const container = document.createElement('div');
+      container.className = 'scratch-container';
+
+      const reveal = document.createElement('div');
+      reveal.className = 'scratch-reveal';
+      reveal.style.background = `linear-gradient(145deg, ${w.bg[0]}, ${w.bg[1]})`;
+      reveal.innerHTML = `
+        <span class="reveal-icon">${w.icon}</span>
+        <p class="reveal-title">${w.title}</p>
+        <p class="reveal-text">${w.text}</p>`;
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'scratch-canvas';
+
+      const badge = document.createElement('p');
+      badge.className = 'scratched-badge';
+      badge.textContent = '✦ révélé ✦';
+
+      container.appendChild(reveal);
+      container.appendChild(canvas);
+      wrap.appendChild(lbl);
+      wrap.appendChild(container);
+      wrap.appendChild(badge);
+      grid.appendChild(wrap);
+
+      initScratch(canvas, w, badge);
+    });
+
+    /* ══════════════════════════════════════════
+       SCRATCH ENGINE
+       - Pinceau large (rayon 32px) = plus facile
+       - Seuil abaissé à 40% = révélation rapide
+       - Canvas redimensionné via ResizeObserver
+    ══════════════════════════════════════════ */
+    function initScratch(canvas, w, badge) {
+      const container = canvas.parentElement;
+      const ctx = canvas.getContext('2d');
+      let revealed  = false;
+      let isDrawing = false;
+      let lastX = null, lastY = null;
+
+      /* Redimensionnement */
+      function resize() {
+        const rect = container.getBoundingClientRect();
+        const W = Math.round(rect.width)  || 300;
+        const H = Math.round(rect.height) || 188;
+        if (canvas.width === W && canvas.height === H) return;
+        canvas.width  = W;
+        canvas.height = H;
+        if (!revealed) drawLayer(W, H);
+      }
+
+      const ro = new ResizeObserver(() => requestAnimationFrame(resize));
+      ro.observe(container);
+      requestAnimationFrame(resize);
+
+      function drawLayer(W, H) {
+        ctx.clearRect(0, 0, W, H);
+
+        /* Dégradé métallique */
+        const grd = ctx.createLinearGradient(0, 0, W, H);
+        grd.addColorStop(0,    w.scratch[0]);
+        grd.addColorStop(0.45, w.scratch[2] || '#fff8e0');
+        grd.addColorStop(1,    w.scratch[1]);
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, W, H);
+
+        /* Grain subtil */
+        ctx.fillStyle = 'rgba(0,0,0,0.055)';
+        for (let x = 0; x < W; x += 5) {
+          for (let y = 0; y < H; y += 5) {
+            if (Math.random() > 0.58) ctx.fillRect(x, y, 1.5, 1.5);
+          }
+        }
+
+        /* Texte guide */
+        const fs = Math.max(12, Math.floor(H * 0.11));
+        ctx.save();
+        ctx.globalAlpha = 0.45;
+        ctx.fillStyle   = 'rgba(20,10,0,0.55)';
+        ctx.font        = `italic ${fs}px 'Cormorant Garamond', serif`;
+        ctx.textAlign   = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Gratte ici ✦', W / 2, H / 2);
+        ctx.restore();
+
+        /* Bordure interne */
+        ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+        ctx.lineWidth   = 1;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(5, 5, W - 10, H - 10, 10);
+        else ctx.rect(5, 5, W - 10, H - 10);
+        ctx.stroke();
+      }
+
+      /* ── Grattage avec pinceau large + interpolation ── */
+      function scratchAt(x, y) {
+        ctx.globalCompositeOperation = 'destination-out';
+
+        /* Ligne entre le dernier point et l'actuel pour un trait fluide */
+        if (lastX !== null) {
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.lineWidth   = 56;   /* pinceau large */
+          ctx.lineCap     = 'round';
+          ctx.lineJoin    = 'round';
+          ctx.stroke();
+        }
+
+        /* Cercle au point actuel */
+        ctx.beginPath();
+        ctx.arc(x, y, 28, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.globalCompositeOperation = 'source-over';
+        lastX = x; lastY = y;
+
+        checkReveal();
+      }
+
+      function endStroke() { isDrawing = false; lastX = null; lastY = null; }
+
+      /* ── Vérification révélation (seuil 40%) ── */
+      let checkThrottle = 0;
+      function checkReveal() {
+        if (revealed) return;
+        const now = Date.now();
+        if (now - checkThrottle < 120) return; /* vérifier max ~8 fois/s */
+        checkThrottle = now;
+
+        const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let transparent = 0;
+        for (let i = 3; i < data.length; i += 4) {
+          if (data[i] < 128) transparent++;
+        }
+        const pct = transparent / (canvas.width * canvas.height || 1);
+        if (pct > 0.40) {
+          revealed = true;
+          canvas.style.transition = 'opacity 0.7s ease';
+          canvas.style.opacity    = '0';
+          badge.classList.add('show');
+          for (let i = 0; i < 12; i++) setTimeout(() => spawnBurst(canvas), i * 70);
+        }
+      }
+
+      /* ── Souris ── */
+      canvas.addEventListener('mousedown', e => {
+        isDrawing = true;
+        scratchAt(e.offsetX, e.offsetY);
+      });
+      canvas.addEventListener('mousemove', e => {
+        if (!isDrawing) return;
+        scratchAt(e.offsetX, e.offsetY);
+      });
+      canvas.addEventListener('mouseup',    endStroke);
+      canvas.addEventListener('mouseleave', endStroke);
+
+      /* ── Tactile ── */
+      function getPos(e) {
+        const r = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        return { x: t.clientX - r.left, y: t.clientY - r.top };
+      }
+      canvas.addEventListener('touchstart', e => {
+        e.preventDefault();
+        isDrawing = true;
+        const p = getPos(e);
+        scratchAt(p.x, p.y);
+      }, { passive: false });
+      canvas.addEventListener('touchmove', e => {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const p = getPos(e);
+        scratchAt(p.x, p.y);
+      }, { passive: false });
+      canvas.addEventListener('touchend',   endStroke);
+      canvas.addEventListener('touchcancel',endStroke);
+    }
+
+    /* ── Burst particules ── */
+    function spawnBurst(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const syms = ['✦','✧','⋆','✩','◆','·','★'];
+      const cols = ['#f0d080','#c9a84c','#ffffff','#80d0ff','#e0a0ff','#90ffc0'];
+      for (let k = 0; k < 6; k++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.textContent = syms[Math.floor(Math.random() * syms.length)];
+        p.style.color = cols[Math.floor(Math.random() * cols.length)];
+        p.style.left  = (rect.left + rect.width  / 2 + (Math.random() * 100 - 50)) + 'px';
+        p.style.top   = (rect.top  + rect.height / 2) + 'px';
+        p.style.setProperty('--dx', (Math.random() * 150 - 75) + 'px');
+        p.style.fontSize = (Math.random() * 13 + 9) + 'px';
+        p.style.animationDuration = (1.8 + Math.random() * 2) + 's';
+        document.body.appendChild(p);
+        p.addEventListener('animationend', () => p.remove());
+      }
+    }
+
+    /* ── Étoiles filantes ── */
+    function spawnStar() {
+      const s = document.createElement('div');
+      s.className = 'shooting-star';
+      s.style.top = (Math.random() * 60) + 'vh';
+      s.style.setProperty('--dy', (Math.random() * 120 - 20) + 'px');
+      s.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
+      document.body.appendChild(s);
+      s.addEventListener('animationend', () => s.remove());
+    }
+    setInterval(spawnStar, 3500);
+    setTimeout(spawnStar, 900);
+
+    /* ── Particules ambiantes ── */
+    const pSym = ['✦','✧','⋆','✩','·','◆'];
+    const pCol = ['#c9a84c','#f0d080','#ffffff','#b0d0ff'];
+    function spawnP() {
+      const p = document.createElement('div');
+      p.className  = 'particle';
+      p.textContent = pSym[Math.floor(Math.random() * pSym.length)];
+      p.style.color = pCol[Math.floor(Math.random() * pCol.length)];
+      p.style.left  = (Math.random() * 100) + 'vw';
+      p.style.top   = '96vh';
+      p.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+      p.style.fontSize = (Math.random() * 9 + 7) + 'px';
+      p.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(p);
+      p.addEventListener('animationend', () => p.remove());
+    }
+    setInterval(spawnP, 1200);
+  </script>
+</body>
+</html>
