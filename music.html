@@ -17,24 +17,15 @@
       --text-dim:    #9aaac0;
       --radius:      14px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Raleway', sans-serif;
-      background: var(--deep);
-      color: var(--text);
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: var(--deep); color: var(--text);
+      min-height: 100dvh; display: flex; flex-direction: column; align-items: center;
       padding: clamp(68px, 10dvh, 100px) clamp(12px, 4vw, 32px) 70px;
-      overflow-x: hidden;
-      position: relative;
+      overflow-x: hidden; position: relative;
     }
-
-    /* ── Fond étoilé ── */
     body::before {
       content: ''; position: fixed; inset: 0; z-index: -2;
       background:
@@ -56,268 +47,130 @@
       animation: starDrift 22s ease-in-out infinite alternate;
     }
     @keyframes starDrift { to { transform: translateY(-10px) translateX(6px); } }
-
-    /* ── Barre dorée ── */
     .deco-line {
       position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 99;
       background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-light), var(--gold), var(--gold-dim), transparent);
       animation: lineGlow 3s ease-in-out infinite;
     }
     @keyframes lineGlow { 0%,100% { opacity: 0.75; } 50% { opacity: 1; box-shadow: 0 0 22px var(--gold); } }
-
-    /* ── Retour ── */
     .retour {
       position: fixed; top: 18px; left: 18px; z-index: 999;
-      padding: 6px 14px;
-      border: 1px solid var(--gold-dim); border-radius: 30px;
+      padding: 6px 14px; border: 1px solid var(--gold-dim); border-radius: 30px;
       background: rgba(20,24,42,0.75); color: var(--gold-light);
-      font-family: 'Raleway', sans-serif;
-      font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+      font-family: 'Raleway', sans-serif; font-size: clamp(0.6rem, 1.4vw, 0.78rem);
       font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
       text-decoration: none; backdrop-filter: blur(10px); transition: all .3s ease;
     }
     .retour:hover { background: var(--gold-dim); color: #fff; transform: translateX(-3px); }
 
-    /* ── Header ── */
-    .header {
-      text-align: center;
-      margin-bottom: clamp(16px, 3dvh, 32px);
-      animation: fadeDown 1s ease both;
-      width: 100%;
-    }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .header-eyebrow {
-      font-size: clamp(0.55rem, 1.3vw, 0.7rem);
-      letter-spacing: 4px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 8px;
-    }
+    /* Header */
+    .header { text-align: center; margin-bottom: clamp(16px, 3dvh, 32px); animation: fadeDown 1s ease both; width: 100%; }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+    .header-eyebrow { font-size: clamp(0.55rem, 1.3vw, 0.7rem); letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
     .header-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 9vw, 4.8rem);
+      font-family: 'Great Vibes', cursive; font-size: clamp(2.4rem, 9vw, 4.8rem);
       background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 45%, var(--gold) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      filter: drop-shadow(0 0 18px rgba(201,168,76,0.45));
-      line-height: 1.1;
+      filter: drop-shadow(0 0 18px rgba(201,168,76,0.45)); line-height: 1.1;
     }
-    .gold-divider {
-      width: clamp(80px, 16vw, 130px); height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: clamp(8px, 1.5dvh, 14px) auto;
-    }
-    .header-sub {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.85rem, 2vw, 1.1rem); color: var(--text-dim);
-    }
+    .gold-divider { width: clamp(80px, 16vw, 130px); height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: clamp(8px, 1.5dvh, 14px) auto; }
+    .header-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(0.85rem, 2vw, 1.1rem); color: var(--text-dim); }
 
-    /* ── Notes dansantes ── */
-    .notes-row {
-      display: flex; gap: clamp(8px, 2.5vw, 22px);
-      margin-bottom: clamp(14px, 2.5dvh, 24px);
-      animation: fadeDown 1s ease 0.2s both;
-    }
-    .note {
-      font-size: clamp(1rem, 3vw, 1.7rem);
-      filter: drop-shadow(0 0 8px rgba(201,168,76,0.5));
-      animation: noteDance 2s ease-in-out infinite;
-    }
-    .note:nth-child(1) { animation-delay: 0s; }
-    .note:nth-child(2) { animation-delay: 0.22s; }
-    .note:nth-child(3) { animation-delay: 0.44s; }
-    .note:nth-child(4) { animation-delay: 0.66s; }
-    .note:nth-child(5) { animation-delay: 0.88s; }
-    @keyframes noteDance {
-      0%,100% { transform: translateY(0) rotate(-5deg); }
-      50%      { transform: translateY(-8px) rotate(5deg); }
-    }
+    /* Notes */
+    .notes-row { display: flex; gap: clamp(8px, 2.5vw, 22px); margin-bottom: clamp(14px, 2.5dvh, 24px); animation: fadeDown 1s ease 0.2s both; }
+    .note { font-size: clamp(1rem, 3vw, 1.7rem); filter: drop-shadow(0 0 8px rgba(201,168,76,0.5)); animation: noteDance 2s ease-in-out infinite; }
+    .note:nth-child(1){animation-delay:0s;} .note:nth-child(2){animation-delay:.22s;} .note:nth-child(3){animation-delay:.44s;} .note:nth-child(4){animation-delay:.66s;} .note:nth-child(5){animation-delay:.88s;}
+    @keyframes noteDance { 0%,100%{transform:translateY(0) rotate(-5deg);} 50%{transform:translateY(-8px) rotate(5deg);} }
 
-    /* ── Liste pistes ── */
-    .tracks-list {
-      width: 100%; max-width: 620px;
-      display: flex; flex-direction: column;
-      gap: clamp(10px, 1.8dvh, 16px);
-      animation: fadeDown 1s ease 0.35s both;
-    }
+    /* Liste */
+    .tracks-list { width: 100%; max-width: 620px; display: flex; flex-direction: column; gap: clamp(10px, 1.8dvh, 16px); animation: fadeDown 1s ease 0.35s both; }
 
-    /* ── Carte piste ── */
+    /* Carte */
     .track {
       background: linear-gradient(145deg, var(--surface2), var(--navy2));
-      border: 1px solid rgba(201,168,76,0.22);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 6px 26px rgba(0,0,0,0.45);
+      border: 1px solid rgba(201,168,76,0.22); border-radius: var(--radius);
+      overflow: hidden; box-shadow: 0 6px 26px rgba(0,0,0,0.45);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
-    .track:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 18px rgba(201,168,76,0.1);
-      border-color: rgba(201,168,76,0.42);
-    }
-    .track.playing {
-      border-color: rgba(201,168,76,0.65);
-      box-shadow: 0 6px 26px rgba(0,0,0,0.45), 0 0 28px rgba(201,168,76,0.22);
-    }
+    .track:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 18px rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.42); }
+    .track.playing { border-color: rgba(201,168,76,0.65); box-shadow: 0 6px 26px rgba(0,0,0,0.45), 0 0 28px rgba(201,168,76,0.22); }
 
-    /* ── En-tête de la piste ── */
     .player-header {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: clamp(10px, 2dvh, 16px) clamp(12px, 3vw, 18px);
       gap: clamp(10px, 2vw, 16px);
-      background: rgba(0,0,0,0.28);
-      border-bottom: 1px solid rgba(201,168,76,0.1);
+      background: rgba(0,0,0,0.28); border-bottom: 1px solid rgba(201,168,76,0.1);
     }
-
-    /* Pochette */
     .cover-placeholder {
-      width: clamp(44px, 11vw, 64px);
-      height: clamp(44px, 11vw, 64px);
+      width: clamp(44px, 11vw, 64px); height: clamp(44px, 11vw, 64px);
       border-radius: 8px; flex-shrink: 0;
       background: linear-gradient(135deg, #1a2a4a, #0d1428);
       border: 1px solid rgba(201,168,76,0.25);
       display: flex; align-items: center; justify-content: center;
       font-size: clamp(1.2rem, 3vw, 1.7rem);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-      position: relative; overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6); position: relative; overflow: hidden;
     }
     .cover-placeholder::after {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent);
-      border-radius: 8px 8px 0 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent); border-radius: 8px 8px 0 0;
     }
-
-    /* Infos texte */
     .info { flex: 1; min-width: 0; }
-    .track-number {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.5rem, 1vw, 0.62rem);
-      letter-spacing: 2px; color: var(--gold-dim);
-      text-transform: uppercase; margin-bottom: 2px;
-    }
-    .track-title {
-      font-size: clamp(0.82rem, 2.2vw, 1rem);
-      font-weight: 600; color: var(--text);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      margin-bottom: 2px;
-    }
-    .track-artist {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.72rem, 1.7vw, 0.9rem); color: var(--text-dim);
-    }
+    .track-number { font-family: 'Cinzel', serif; font-size: clamp(0.5rem, 1vw, 0.62rem); letter-spacing: 2px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 2px; }
+    .track-title { font-size: clamp(0.82rem, 2.2vw, 1rem); font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+    .track-artist { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(0.72rem, 1.7vw, 0.9rem); color: var(--text-dim); }
+
+    /* ── PAROLES : toujours visibles sur tous les écrans ── */
     .track-desc {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.65rem, 1.3vw, 0.78rem);
-      color: rgba(255,255,255,0.65);
-      margin-top: 3px;
-      /* On laisse le texte wrapper sur mobile au lieu de couper */
-      white-space: normal;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.66rem, 1.4vw, 0.78rem);
+      color: rgba(255,255,255,0.62);
+      margin-top: 4px;
+      line-height: 1.5;
       letter-spacing: 0.2px;
-      line-height: 1.4;
+      display: block;          /* toujours visible */
+      white-space: normal;     /* autorise le retour à la ligne */
+      overflow: visible;
     }
 
-    /* Égaliseur animé */
-    .equalizer {
-      display: none;
-      align-items: flex-end;
-      gap: 3px; height: 20px;
-      flex-shrink: 0; margin-left: 4px;
-    }
+    /* Égaliseur */
+    .equalizer { display: none; align-items: flex-end; gap: 3px; height: 20px; flex-shrink: 0; margin-left: 4px; }
     .track.playing .equalizer { display: flex; }
-    .eq-bar {
-      width: 3px; background: var(--gold); border-radius: 2px;
-      animation: eqBounce 0.8s ease-in-out infinite alternate;
-    }
-    .eq-bar:nth-child(1) { height: 8px;  animation-delay: 0s; }
-    .eq-bar:nth-child(2) { height: 16px; animation-delay: 0.15s; }
-    .eq-bar:nth-child(3) { height: 10px; animation-delay: 0.3s; }
-    .eq-bar:nth-child(4) { height: 18px; animation-delay: 0.08s; }
-    @keyframes eqBounce {
-      from { transform: scaleY(0.35); }
-      to   { transform: scaleY(1); }
-    }
+    .eq-bar { width: 3px; background: var(--gold); border-radius: 2px; animation: eqBounce 0.8s ease-in-out infinite alternate; }
+    .eq-bar:nth-child(1){height:8px;animation-delay:0s;} .eq-bar:nth-child(2){height:16px;animation-delay:.15s;} .eq-bar:nth-child(3){height:10px;animation-delay:.3s;} .eq-bar:nth-child(4){height:18px;animation-delay:.08s;}
+    @keyframes eqBounce { from{transform:scaleY(0.35);} to{transform:scaleY(1);} }
 
-    /* ── Lecteur audio ── */
-    .audio-wrap {
-      padding: clamp(8px, 1.5dvh, 12px) clamp(12px, 3vw, 18px);
-    }
-    audio {
-      width: 100%;
-      height: 40px;
-      outline: none;
-      border-radius: 8px;
-      /* forcer 100% sur tous navigateurs */
-      display: block;
-    }
-    /* Chrome / Safari */
-    audio::-webkit-media-controls-panel {
-      background: linear-gradient(90deg, rgba(8,12,22,0.98), rgba(14,28,54,0.98));
-    }
+    /* Audio */
+    .audio-wrap { padding: clamp(8px, 1.5dvh, 12px) clamp(12px, 3vw, 18px); }
+    audio { width: 100%; height: 40px; outline: none; border-radius: 8px; display: block; }
+    audio::-webkit-media-controls-panel { background: linear-gradient(90deg, rgba(8,12,22,0.98), rgba(14,28,54,0.98)); }
     audio::-webkit-media-controls-timeline { accent-color: var(--gold); }
 
-    /* ── Footer ── */
-    .footer-msg {
-      text-align: center;
-      margin-top: clamp(22px, 4dvh, 40px);
-      animation: fadeDown 1s ease 0.6s both;
-      padding: 0 clamp(10px, 4vw, 24px);
-    }
-    .footer-msg p {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.88rem, 2vw, 1.1rem);
-      color: var(--text-dim); line-height: 1.7;
-    }
+    /* Footer */
+    .footer-msg { text-align: center; margin-top: clamp(22px, 4dvh, 40px); animation: fadeDown 1s ease 0.6s both; padding: 0 clamp(10px, 4vw, 24px); }
+    .footer-msg p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(0.88rem, 2vw, 1.1rem); color: var(--text-dim); line-height: 1.7; }
     .footer-msg .gold-w { color: var(--gold-light); }
-    .footer-sign {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.4rem, 4vw, 1.9rem);
-      color: var(--gold-light);
-      margin-top: clamp(8px, 2dvh, 14px);
-      filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
-    }
+    .footer-sign { font-family: 'Great Vibes', cursive; font-size: clamp(1.4rem, 4vw, 1.9rem); color: var(--gold-light); margin-top: clamp(8px, 2dvh, 14px); filter: drop-shadow(0 0 12px rgba(201,168,76,0.4)); }
 
-    /* ── Particules ── */
-    .particle {
-      position: fixed; pointer-events: none; z-index: 10;
-      animation: partFloat linear forwards;
-    }
-    @keyframes partFloat {
-      0%   { transform: translateY(0) translateX(0); opacity: 0.9; }
-      100% { transform: translateY(-90dvh) translateX(var(--dx,20px)); opacity: 0; }
-    }
+    /* Particules */
+    .particle { position: fixed; pointer-events: none; z-index: 10; animation: partFloat linear forwards; }
+    @keyframes partFloat { 0%{transform:translateY(0) translateX(0);opacity:.9;} 100%{transform:translateY(-90dvh) translateX(var(--dx,20px));opacity:0;} }
 
-    /* ══════════════════════════
-       RESPONSIVE
-    ══════════════════════════ */
-
-    /* Petits mobiles */
+    /* Responsive */
     @media (max-width: 420px) {
-      .player-header {
-        padding: 10px 11px;
-        gap: 9px;
-      }
-      .cover-placeholder {
-        width: 40px; height: 40px;
-        font-size: 1.1rem;
-      }
+      .player-header { padding: 10px 11px; gap: 9px; }
+      .cover-placeholder { width: 40px; height: 40px; font-size: 1.1rem; }
       .track-title  { font-size: 0.82rem; }
       .track-artist { font-size: 0.7rem; }
-      .track-desc   { display: none; } /* gain de place sur très petit écran */
-      .equalizer    { display: none !important; } /* évite le débordement */
+      .track-desc   { font-size: 0.64rem; } /* réduit mais VISIBLE */
+      .equalizer    { display: none !important; }
       audio         { height: 36px; }
     }
-
-    /* Très petits écrans */
     @media (max-width: 360px) {
       body { padding-left: 8px; padding-right: 8px; }
       .header-title { font-size: 2rem; }
       .track-number { display: none; }
+      .track-desc   { font-size: 0.6rem; }
     }
   </style>
 </head>
@@ -334,11 +187,7 @@
   </header>
 
   <div class="notes-row">
-    <span class="note">🎵</span>
-    <span class="note">🎶</span>
-    <span class="note">🎵</span>
-    <span class="note">🎶</span>
-    <span class="note">🎵</span>
+    <span class="note">🎵</span><span class="note">🎶</span><span class="note">🎵</span><span class="note">🎶</span><span class="note">🎵</span>
   </div>
 
   <div class="tracks-list">
@@ -353,16 +202,9 @@
           <p class="track-artist">Sheikha TheLgnd</p>
           <p class="track-desc">✦ Damala beuguei fi mbeuguel thiossano, ba dara donoul dara ba tay djilei...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="sheikha theLgnd - reeni xol.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="sheikha theLgnd - reeni xol.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 02 -->
@@ -375,16 +217,9 @@
           <p class="track-artist">Sheikha TheLgnd</p>
           <p class="track-desc">✦ Malay wo, ngamay wo, khamna legui nga yeksi, mba ma feki sila...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="sheikha theLgnd - aljana.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="sheikha theLgnd - aljana.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 03 -->
@@ -397,16 +232,9 @@
           <p class="track-artist">Jahman Xpress</p>
           <p class="track-desc">✦ Loumay doyei banekh, mak ioe sougn ko naroul bokk...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="jahman-eternel.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="jahman-eternel.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 04 -->
@@ -419,16 +247,9 @@
           <p class="track-artist">Ariana Grande</p>
           <p class="track-desc">✦ Just wanna let this story die and I'll be alright...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="ariana grande - we can't be friends.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="ariana grande - we can't be friends.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 05 -->
@@ -441,16 +262,9 @@
           <p class="track-artist">El Hadj Ndiaye</p>
           <p class="track-desc">✦ Yu sew yingma tamal bama mine leine, nga dem bayima...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="el hadj ndiaye - yu sew yi.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="el hadj ndiaye - yu sew yi.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 06 -->
@@ -463,16 +277,9 @@
           <p class="track-artist">Fredz</p>
           <p class="track-desc">✦ T'as ce pouvoir de me faire sentir extraordinaire...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="fredz - extraordinaire.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="fredz - extraordinaire.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 07 -->
@@ -485,16 +292,9 @@
           <p class="track-artist">Justin Bieber</p>
           <p class="track-desc">✦ If it's not you, it's not anyone...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="justin bieber - anyone.mpeg" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="justin bieber - anyone.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
     <!-- 08 -->
@@ -507,41 +307,59 @@
           <p class="track-artist">James Arthur</p>
           <p class="track-desc">✦ I'm not gonna wait until you're done, pretending you don't need anyone...</p>
         </div>
-        <div class="equalizer">
-          <div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
+      </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="james arthur - naked.mpeg" type="audio/mpeg"></audio></div>
+    </div>
+
+    <!-- 09 ── NOUVELLE ── -->
+    <div class="track">
+      <div class="player-header">
+        <div class="cover-placeholder">🎵</div>
+        <div class="info">
+          <p class="track-number">Piste 09</p>
+          <p class="track-title">Talk To Me</p>
+          <p class="track-artist">Khamdel Lo</p>
+          <p class="track-desc">✦ Ndakh mane sama yenei si ioe moy gnou bok banekh ak nakar, metitou adouna dagnkoy yeuguo...</p>
         </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
-      <div class="audio-wrap">
-        <audio controls preload="metadata">
-          <source src="james arthur - naked.mpeg" type="audio/mpeg">
-        </audio>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="khamdel_lo_-_talk_to_me.mpeg" type="audio/mpeg"></audio></div>
+    </div>
+
+    <!-- 10 ── NOUVELLE ── -->
+    <div class="track">
+      <div class="player-header">
+        <div class="cover-placeholder">🎶</div>
+        <div class="info">
+          <p class="track-number">Piste 10</p>
+          <p class="track-title">Made For Me</p>
+          <p class="track-artist">Muni Long</p>
+          <p class="track-desc">✦ Nobody knows me like you do, nobody gonna love me quite like you...</p>
+        </div>
+        <div class="equalizer"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
       </div>
+      <div class="audio-wrap"><audio controls preload="metadata"><source src="muni_long_-_made_for_me.mpeg" type="audio/mpeg"></audio></div>
     </div>
 
   </div>
 
   <div class="footer-msg">
-    <p>Ces mélodies portent<br>
-    <span class="gold-w">tout ce que les mots n'osent pas dire</span>.</p>
-    <p class="footer-sign">Pour toi, à l'infini 💙</p>
+    <p>Ces mélodies portent<br><span class="gold-w">tout ce que les mots n'osent pas dire</span>.</p>
   </div>
 
   <script>
-    /* Égaliseur actif quand la piste joue */
     document.querySelectorAll('audio').forEach(audio => {
       const track = audio.closest('.track');
       audio.addEventListener('play',  () => track.classList.add('playing'));
       audio.addEventListener('pause', () => track.classList.remove('playing'));
       audio.addEventListener('ended', () => track.classList.remove('playing'));
     });
-
-    /* Particules ambiantes (moins fréquentes sur mobile) */
     const pSym = ['♪','♫','✦','✧','⋆','·'];
     const pCol = ['#c9a84c','#f0d080','#ffffff','#b0d0ff'];
     function spawnP() {
       const p = document.createElement('div');
-      p.className   = 'particle';
+      p.className = 'particle';
       p.textContent = pSym[Math.floor(Math.random() * pSym.length)];
       p.style.color = pCol[Math.floor(Math.random() * pCol.length)];
       p.style.left  = (Math.random() * 100) + 'vw';
